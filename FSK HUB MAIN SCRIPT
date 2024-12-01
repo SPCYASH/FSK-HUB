@@ -1,0 +1,151 @@
+-- Load Kavo UI Library
+local success, Library = pcall(function()
+    return loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+end)
+
+if not success then
+    warn("Failed to load Kavo UI Library.")
+    return
+end
+
+-- Ultra-Premium Animation
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Parent = game.CoreGui
+
+local AnimationFrame = Instance.new("Frame")
+AnimationFrame.Parent = ScreenGui
+AnimationFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+AnimationFrame.Size = UDim2.new(1, 0, 1, 0)
+
+local AnimationLabel = Instance.new("TextLabel")
+AnimationLabel.Parent = AnimationFrame
+AnimationLabel.Text = "⚡ ULTRA SUPER PREMIUM FSK_HUB ACTIVATED ⚡"
+AnimationLabel.Size = UDim2.new(1, 0, 0.8, 0)
+AnimationLabel.TextColor3 = Color3.fromRGB(0, 255, 0)
+AnimationLabel.Font = Enum.Font.GothamBlack
+AnimationLabel.TextScaled = true
+AnimationLabel.BackgroundTransparency = 1
+AnimationLabel.TextStrokeTransparency = 0
+AnimationLabel.TextStrokeColor3 = Color3.fromRGB(255, 0, 0)
+
+local GlowingEffect = Instance.new("UIGradient")
+GlowingEffect.Parent = AnimationLabel
+GlowingEffect.Color = ColorSequence.new{
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(0, 255, 0)),
+    ColorSequenceKeypoint.new(0.5, Color3.fromRGB(255, 255, 0)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 255, 0))
+}
+GlowingEffect.Rotation = 90
+
+local Sound = Instance.new("Sound")
+Sound.Parent = ScreenGui
+Sound.SoundId = "rbxassetid://6026984224"
+Sound.Volume = 10
+Sound.Looped = true
+Sound:Play()
+
+local ParticleEmitter = Instance.new("ParticleEmitter", AnimationFrame)
+ParticleEmitter.Texture = "rbxassetid://5411983303"
+ParticleEmitter.Speed = NumberRange.new(3, 5)
+ParticleEmitter.Lifetime = NumberRange.new(3, 6)
+ParticleEmitter.Rate = 150
+ParticleEmitter.RotSpeed = NumberRange.new(-360, 360)
+
+wait(3.9)
+AnimationFrame:Destroy()
+Sound:Destroy()
+
+-- Main GUI Creation
+local MainWindow = Library.CreateLib("🔥 ULTRA SUPER PREMIUM FSK_HUB ⚡", "DarkTheme")
+
+-- Auto Farm Tab
+local AutoFarmTab = MainWindow:NewTab("Auto Farm ⚡")
+local AutoFarmSection = AutoFarmTab:NewSection("Farming Options ⚡")
+
+AutoFarmSection:NewToggle("Auto Farm Red ⚡", "Farms red orbs for 500M steps/sec", function(state)
+    getgenv().AutoFarmRed = state
+    while getgenv().AutoFarmRed do
+        pcall(function()
+            for i = 1, 50 do
+                game:GetService("ReplicatedStorage").rEvents.orbEvent:FireServer("collectOrb", "Red Orb", "City")
+            end
+        end)
+        wait(0.1)
+    end
+end)
+
+AutoFarmSection:NewToggle("Auto Collect Gems 💎", "Automatically collects 10,000 gems per second", function(state)
+    getgenv().AutoCollectGems = state
+    while getgenv().AutoCollectGems do
+        pcall(function()
+            game:GetService("ReplicatedStorage").rEvents.gemEvent:FireServer("collectGem", "City", 10000)
+        end)
+        wait(1)
+    end
+end)
+
+-- Extra Tab
+local ExtraTab = MainWindow:NewTab("Extra ⚡")
+local ExtraSection = ExtraTab:NewSection("Additional Features ⚡")
+
+ExtraSection:NewToggle("Maximum EXP ⚡", "Gives 100B EXP per second", function(state)
+    getgenv().MaxEXP = state
+    while getgenv().MaxEXP do
+        pcall(function()
+            for i = 1, 10 do
+                game:GetService("ReplicatedStorage").rEvents.expEvent:FireServer("collectExp", "City", 100000000000)
+            end
+        end)
+        wait(1)
+    end
+end)
+
+ExtraSection:NewToggle("Auto Rebirth ⚡", "Rebirths automatically at max level", function(state)
+    getgenv().AutoRebirth = state
+    while getgenv().AutoRebirth do
+        pcall(function()
+            local playerStats = game.Players.LocalPlayer.leaderstats
+            if playerStats and playerStats.Level and playerStats.MaxLevel and playerStats.Level.Value >= playerStats.MaxLevel.Value then
+                game:GetService("ReplicatedStorage").rEvents.rebirthEvent:FireServer()
+            end
+        end)
+        wait(1)
+    end
+end)
+
+-- NEW: Auto Hoops 10
+ExtraSection:NewToggle("Auto Hoops 10 ⚡", "Automatically collects 10k hoops every 3 seconds", function(state)
+    getgenv().AutoHoops = state
+    while getgenv().AutoHoops do
+        pcall(function()
+            local hoop = game:GetService("Workspace").Hoops:GetChildren()
+            for _, hoopInstance in pairs(hoop) do
+                hoopInstance.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+            end
+            game:GetService("ReplicatedStorage").rEvents.hoopEvent:FireServer("collectHoop", 10000)
+        end)
+        wait(3)
+    end
+end)
+
+-- NEW: Anti AFK Button
+ExtraSection:NewToggle("ANTI AFK ⚡", "Prevents AFK disconnection and stabilizes network", function(state)
+    getgenv().AntiAFK = state
+    while getgenv().AntiAFK do
+        pcall(function()
+            game:GetService("VirtualUser"):CaptureController()
+            game:GetService("VirtualUser"):ClickButton2(Vector2.new())
+        end)
+        wait(60)
+    end
+end)
+
+-- Credits Tab
+local CreditsTab = MainWindow:NewTab("Credits 💰")
+local CreditsSection = CreditsTab:NewSection("Credit Information ⚡")
+CreditsSection:NewLabel("Created by- @impogi1258 ⚡")
+CreditsSection:NewLabel("Discord Username - @atsyash7 ⚡")
+CreditsSection:NewLabel("By Yash, Indian Scripter ⚡")
+CreditsSection:NewLabel("Stay tuned for updates - @FSK_CLAN_HUB ⚡")
+
+print("🔥 ULTRA SUPER PREMIUM FSK_HUB ⚡ Script Loaded Successfully!")
